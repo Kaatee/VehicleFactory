@@ -3,6 +3,7 @@ package main;
 public class Vehicle {
     private int processTime;
     private double cost;
+    private String type;
 
     public Vehicle(int processTime, double cost){
         this.cost = cost;
@@ -10,12 +11,12 @@ public class Vehicle {
     }
 
     void process(){
+        System.out.println("Proceed: " + this.getClass());
         try {
             Thread.sleep(getProcessTime()*1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("Skonczylem produkowac"+this.getClass());
     };
 
     public int getProcessTime() {
@@ -24,6 +25,10 @@ public class Vehicle {
 
     public double getCost() {
         return cost;
+    }
+
+    public String getType() {
+        return type;
     }
 
 }
