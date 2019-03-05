@@ -3,22 +3,26 @@ package main;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
+public class Order implements Serializable { //singleton
 
-@XmlRootElement
-public class Order implements Serializable {
+    private static Order instance;
+
     private ArrayList<Vehicle> listOfVehicles;
     private double totalCost;
-    private String type;////
 
 
-    public Order(){
-        this.totalCost = 0;
-        this.listOfVehicles = new ArrayList<>();
+    private Order(){}
+
+    public static Order getInstance(){
+        if(instance==null) {
+            instance = new Order();
+            instance.totalCost = 0;
+            instance.listOfVehicles = new ArrayList<>();
+        }
+        return instance;
     }
 
-    public void addVehicle(Vehicle vehicle){
+    public synchronized void addVehicle(Vehicle vehicle){
         this.listOfVehicles.add(vehicle);
         this.totalCost += vehicle.getCost();
     }
@@ -29,14 +33,5 @@ public class Order implements Serializable {
 
     public double getTotalCost() {
         return totalCost;
-    }
-
-    @XmlAttribute
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 }

@@ -12,6 +12,10 @@ class MyThread implements Runnable{
     @Override
     public void run(){
         Vehicle vehicle = vf.createVehicle(type);
+
+        Order order = Order.getInstance();
+        order.addVehicle(vehicle);
+
         vehicle.process();
     }
 }

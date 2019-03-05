@@ -11,7 +11,6 @@ public class Vehicle {
     }
 
     void process(){
-        System.out.println("Proceed: " + this.getClass());
         try {
             Thread.sleep(getProcessTime()*1000);
         } catch (InterruptedException e) {

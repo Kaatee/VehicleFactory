@@ -11,18 +11,14 @@ public class Main {
 
 
     public static void main(String[] args){
-
         long startTime = System.currentTimeMillis();
 
-        //String[] types = {"car", "motorcycle","truck","car","motorcycle"};  //car-10, motor-5, truck-15
-        //String[] types = {"car", "car","car"};
-
-        System.out.println("\n\nSerialization");
         XMLHandler xml = new XMLHandler();
         try {
+            Order order = Order.getInstance();
+
             ArrayList<String> vehicleTypes;
             vehicleTypes = xml.deserialize();
-
             ExecutorService executor = Executors.newFixedThreadPool(3);
 
             for(int i=0; i<vehicleTypes.size(); i++){
@@ -31,25 +27,15 @@ public class Main {
             }
 
             executor.shutdown();
-            while (!executor.isTerminated()) {
-            }
-            System.out.println("\nFinished all threads");
+            while (!executor.isTerminated()) {}
+
+            System.out.println("Totel cost: " + order.getTotalCost());
 
             long duration = (System.currentTimeMillis() - startTime) / 1000;
-            System.out.println("Program execution time: " + duration);
+            System.out.println("Program execution time [s]: " + duration);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-
-
-
-
-///////////////////////////////////////////////////////////
-
-        //////////////////////////////////////
     }
-
 }
