@@ -3,7 +3,7 @@ package main;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Order implements Serializable { //singleton
+public class Order implements Serializable {
 
     private static Order instance;
 
@@ -20,6 +20,10 @@ public class Order implements Serializable { //singleton
             instance.listOfVehicles = new ArrayList<>();
         }
         return instance;
+    }
+
+    public void destroy(){
+        instance = null;
     }
 
     public synchronized void addVehicle(Vehicle vehicle){
